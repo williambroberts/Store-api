@@ -16,6 +16,7 @@ const app = (0, express_1.default)();
 const SESSION = express_session_1.default;
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_mysql_session_1 = __importDefault(require("express-mysql-session"));
+const suggestRouter_1 = __importDefault(require("./Routers/suggestRouter"));
 const MySQLStore = (0, express_mysql_session_1.default)(SESSION);
 let options = {};
 if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PORT && process.env.DB_PASSWORD && process.env.DB_DATABASE) {
@@ -60,5 +61,6 @@ app.get("/", (req, res) => {
     res.send("ok will");
 });
 app.use("/auth", authRouter_1.default);
+app.use("/suggest", suggestRouter_1.default);
 app.use(errorMiddleware_1.errorHandler);
 exports.default = app;

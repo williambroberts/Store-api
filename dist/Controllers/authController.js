@@ -44,7 +44,7 @@ exports.registerController = (0, express_async_handler_1.default)((req, res) => 
     if (hashed) {
         //update to db
         const [row] = yield db_1.default.query(`
-        insert into users (email,password)
+        insert into store_users (email,password)
         values (?, ?)
         `, [email, hashed]);
         res.status(200);

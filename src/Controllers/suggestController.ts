@@ -13,8 +13,7 @@ const suggestProductController =ash(async(req:any,res:Response)=>{
     values (?,?,?)
     `,[name,email,suggestion])
     if (result){
-        console.trace("suggestion")
-        console.log(result)
+        
         res.status(200)
         res.json({
             success:true,
