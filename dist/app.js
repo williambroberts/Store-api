@@ -34,7 +34,8 @@ app.use(SESSION({
     saveUninitialized: false,
     resave: false,
     secret: "3824398",
-    store: sessionStore
+    store: sessionStore,
+    cookie: { maxAge: 3600000 }
 }));
 sessionStore.onReady().then(() => {
     // MySQL session store ready for use.
@@ -55,7 +56,10 @@ app.use(passport_1.default.session());
 app.use((0, compression_1.default)());
 app.use((0, helmet_1.default)());
 app.use(body_parser_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: ['http://localhost:3000', 'https://store-five-xi.vercel.app'],
+    credentials: true
+}));
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
     res.send("ok will");

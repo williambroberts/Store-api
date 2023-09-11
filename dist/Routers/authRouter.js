@@ -74,9 +74,10 @@ function localVerifyFunctionasync(email, password, done) {
         ;
     });
 }
-authRouter.get("/auth/fail", authController_1.failController);
+authRouter.get("/fail", authController_1.failController);
 authRouter.post("/register", Validators_1.registerVS, Validators_1.valitatorVS, authController_1.registerController);
-authRouter.get("/logout", authMiddleware_1.enableAuthenticate, authController_1.logoutController);
+authRouter.post("/logout", authMiddleware_1.enableAuthenticate, authController_1.logoutController);
+authRouter.get("/status", authController_1.isAuthController);
 authRouter.post("/login", passport_1.default.authenticate('local', { failureRedirect: '/auth/fail',
     failureMessage: true }), authController_1.loginController);
 exports.default = authRouter;

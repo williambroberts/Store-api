@@ -12,15 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.failController = exports.getAllController = exports.getOneController = exports.logoutController = exports.registerController = exports.loginController = void 0;
+exports.failController = exports.getAllController = exports.getOneController = exports.logoutController = exports.registerController = exports.loginController = exports.isAuthController = void 0;
 const Errors_1 = require("../utils/Errors");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const db_1 = __importDefault(require("../db/db"));
 const passwords_1 = require("../Helpers/passwords");
+exports.isAuthController = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200);
+    res.json({
+        success: true,
+        status: 200,
+        isAuth: req.isAuthenticated()
+    });
+}));
 const loginController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200);
     res.json({ success: true,
-        user: req.user,
+        user_email: req.user.email,
+        user_id: req.user.id,
+        status: 200,
         route: "loginController"
     });
 });
@@ -48,14 +58,15 @@ exports.registerController = (0, express_async_handler_1.default)((req, res) => 
         values (?, ?)
         `, [email, hashed]);
         res.status(200);
-        res.json({ success: true,
-            user: row });
+        res.json({ success: true, status: 200
+        });
     }
     else {
         throw new Errors_1.InternalServerError("hash problem");
     }
 }));
 exports.logoutController = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("loggin out");
     req.logout(function (err) {
         if (err) {
             res.status(500);
