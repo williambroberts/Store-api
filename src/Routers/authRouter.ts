@@ -1,7 +1,7 @@
 
 import express from "express"
 import { enableAuthenticate } from "../Middleware/authMiddleware"
-import { failController, loginController, logoutController, registerController } from "../Controllers/authController"
+import { failController, isAuthController, loginController, logoutController, registerController } from "../Controllers/authController"
 import { loginVS, registerVS, valitatorVS } from "../utils/Validators"
 import passport from "passport"
 
@@ -69,10 +69,10 @@ async function localVerifyFunctionasync(email:string, password:string, done:any)
 
 
 
-authRouter.get("/auth/fail",failController)
+authRouter.get("/fail",failController)
 authRouter.post("/register",registerVS,valitatorVS,registerController)
-authRouter.get("/logout",enableAuthenticate,logoutController)
-
+authRouter.post("/logout",enableAuthenticate,logoutController)
+authRouter.get("/status",isAuthController)
 authRouter.post("/login",
 passport.authenticate('local', 
 { failureRedirect: '/auth/fail',

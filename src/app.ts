@@ -42,7 +42,8 @@ app.use(SESSION({
     saveUninitialized:false,
     resave:false,
     secret:"3824398",
-    store:sessionStore
+    store:sessionStore,
+	cookie:{maxAge:3600000}
 		
 }))
 sessionStore.onReady().then(() => {
@@ -64,7 +65,12 @@ app.use(passport.session());
 app.use(compression())
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors(
+	{
+		origin:['http://localhost:3000','https://store-five-xi.vercel.app'],
+		credentials:true
+	}
+))
 app.use(bodyParser.urlencoded({extended:false}))
 
 

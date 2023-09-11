@@ -3,10 +3,23 @@ import ash from "express-async-handler"
 import pool from "../db/db"
 import { hashPassword } from "../Helpers/passwords"
 import { Response } from "express"
+
+
+export const isAuthController = ash(async(req:any,res:Response)=>{
+    res.status(200)
+    res.json({
+        success:true,
+        status:200,
+        isAuth:req.isAuthenticated()
+    })
+})
+
 export const loginController = async(req:any,res:Response)=>{
     res.status(200)
     res.json({success:true,
-    user:req.user,
+    user_email:req.user.email,
+    user_id:req.user.id,
+    status:200,
     route:"loginController"
     })
 }
@@ -37,7 +50,7 @@ export const registerController = ash(async(req:any,res:Response)=>{
        
         res.status(200)
         res.json({success:true,
-        user:row})
+        })
     }else {
         throw new InternalServerError("hash problem")
     }
