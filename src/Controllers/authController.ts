@@ -49,7 +49,7 @@ export const registerController = ash(async(req:any,res:Response)=>{
         `,[email,hashed])
        
         res.status(200)
-        res.json({success:true,
+        res.json({success:true,status:200
         })
     }else {
         throw new InternalServerError("hash problem")
