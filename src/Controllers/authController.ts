@@ -58,6 +58,7 @@ export const registerController = ash(async(req:any,res:Response)=>{
 })
 
 export const logoutController = ash(async(req:any,res:Response)=>{
+    console.log("loggin out")
     req.logout(function (err:Error) {
       if (err) {
          res.status(500)
