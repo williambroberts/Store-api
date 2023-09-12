@@ -51,7 +51,7 @@ sessionStore.onReady().then(() => {
 	console.log('MySQLStore ready');
 }).catch(error => {
 	// Something went wrong.
-	console.error(error);
+	console?.error(error);
 });
 sessionStore.close().then(() => {
 	// Successfuly closed the MySQL session store.
@@ -75,7 +75,8 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 
 app.get("/" ,(req,res)=>{
-    res.send("ok will")
+    res.status(200)
+	res.json({success:"true 🕊️"})
 })
 
 app.use("/auth",authRouter)

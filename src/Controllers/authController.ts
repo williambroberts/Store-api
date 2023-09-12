@@ -47,12 +47,16 @@ export const registerController = ash(async(req:any,res:Response)=>{
         insert into store_users (email,password)
         values (?, ?)
         `,[email,hashed])
-       
-        res.status(200)
-        res.json({success:true,status:200
-        })
+        if (row){
+            res.status(200)
+            res.json({success:true,status:200})
+        }else {
+            throw new InternalServerError('Error registering user to DB')
+        }
+        
+        
     }else {
-        throw new InternalServerError("hash problem")
+        throw new InternalServerError("Error hashing password")
     }
     
 })
