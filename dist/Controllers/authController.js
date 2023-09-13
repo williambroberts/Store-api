@@ -27,6 +27,8 @@ exports.isAuthController = (0, express_async_handler_1.default)((req, res) => __
 }));
 const loginController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200);
+    let cookie = req.cookie;
+    console.log(cookie);
     res.json({ success: true,
         user_email: req.user.email,
         user_id: req.user.id,

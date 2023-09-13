@@ -16,6 +16,8 @@ export const isAuthController = ash(async(req:any,res:Response)=>{
 
 export const loginController = async(req:any,res:Response)=>{
     res.status(200)
+    let cookie = req.cookie
+    console.log(cookie)
     res.json({success:true,
     user_email:req.user.email,
     user_id:req.user.id,
