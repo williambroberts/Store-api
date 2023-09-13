@@ -74,7 +74,7 @@ authRouter.get("/fail",failController)
 authRouter.post("/register",registerVS,valitatorVS,registerController)
 authRouter.post("/logout",enableAuthenticate,logoutController)
 authRouter.get("/status",isAuthController)
-authRouter.post("/login",
+authRouter.post("/login",loginVS,valitatorVS,
 passport.authenticate('local', 
 { failureRedirect: '/auth/fail',
  failureMessage: true }),
