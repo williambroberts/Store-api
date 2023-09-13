@@ -12,6 +12,7 @@ const helmet_1 = __importDefault(require("helmet"));
 const passport_1 = __importDefault(require("passport"));
 const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./db/db"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
 const SESSION = express_session_1.default;
 const body_parser_1 = __importDefault(require("body-parser"));
@@ -29,6 +30,7 @@ if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PORT && process
     };
 }
 const sessionStore = new MySQLStore(options, db_1.default);
+app.use((0, cookie_parser_1.default)());
 app.use(SESSION({
     name: "fh485-dadwa",
     saveUninitialized: false,

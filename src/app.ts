@@ -7,7 +7,7 @@ import helmet from "helmet"
 import passport from "passport"
 import cors from "cors"
 import pool from "./db/db"
-
+import cookieParser from "cookie-parser"
 const app = express()
 
 const SESSION:any = session
@@ -37,7 +37,7 @@ if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PORT && process
 
 const sessionStore = new MySQLStore(options,pool);
 
-
+app.use(cookieParser());
 app.use(SESSION({
     name:"fh485-dadwa",
     saveUninitialized:false,
