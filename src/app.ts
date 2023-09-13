@@ -43,7 +43,7 @@ app.use(SESSION({
     resave:false,
     secret:"3824398",
     store:sessionStore,
-	cookie:{maxAge:3600000}
+	// cookie:{maxAge:3600000}
 		
 }))
 sessionStore.onReady().then(() => {

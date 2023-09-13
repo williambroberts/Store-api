@@ -25,7 +25,16 @@ describe('register controller POST /auth/register',()=>{
 
 
     describe('when the user inputs a wrong request',()=>{
-        it('should send a 400 Bad request error',async()=>{
+        it('should send a 400 Bad request error for no email',async()=>{
+            await pool.query.mockImplementationOnce(()=>[]).mockImplementationOnce(()=>[])
+            
+            const response  = await request(app).post("/auth/register").send({
+                password:"274759"
+            })
+            expect(response.status).toBe(400)
+            expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
+        })
+        it('should send a 400 Bad request for no password',async()=>{
             await pool.query.mockImplementationOnce(()=>[]).mockImplementationOnce(()=>[])
             
             const response  = await request(app).post("/auth/register").send({
