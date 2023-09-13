@@ -37,7 +37,7 @@ app.use(SESSION({
     resave: false,
     secret: "3824398",
     store: sessionStore,
-    //cookie:{secure:true,sameSite:'none'}
+    cookie: { secure: 'auto', sameSite: 'none' }
     // cookie:{maxAge:3600000}
 }));
 sessionStore.onReady().then(() => {
@@ -70,5 +70,8 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRouter_1.default);
 app.use("/suggest", suggestRouter_1.default);
+app.all("*", (req, res) => {
+    res.status(404).json({ message: "This route does not exist" });
+});
 app.use(errorMiddleware_1.errorHandler);
 exports.default = app;
