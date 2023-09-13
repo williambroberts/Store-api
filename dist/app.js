@@ -35,14 +35,14 @@ app.use(SESSION({
     resave: false,
     secret: "3824398",
     store: sessionStore,
-    cookie: { maxAge: 3600000 }
+    // cookie:{maxAge:3600000}
 }));
 sessionStore.onReady().then(() => {
     // MySQL session store ready for use.
     console.log('MySQLStore ready');
 }).catch(error => {
     // Something went wrong.
-    console.error(error);
+    console === null || console === void 0 ? void 0 : console.error(error);
 });
 sessionStore.close().then(() => {
     // Successfuly closed the MySQL session store.
@@ -62,7 +62,8 @@ app.use((0, cors_1.default)({
 }));
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
-    res.send("ok will");
+    res.status(200);
+    res.json({ success: "true 🕊️" });
 });
 app.use("/auth", authRouter_1.default);
 app.use("/suggest", suggestRouter_1.default);

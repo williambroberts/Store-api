@@ -21,6 +21,7 @@ const authRouter = express_1.default.Router();
 const db_1 = __importDefault(require("../db/db"));
 const passwords_1 = require("../Helpers/passwords");
 const passport_local_1 = __importDefault(require("passport-local"));
+const EmailSubscriptionController_1 = require("../Controllers/EmailSubscriptionController");
 //passport 
 const LocalStrategy = passport_local_1.default.Strategy;
 passport_1.default.serializeUser(function (user, done) {
@@ -78,6 +79,7 @@ authRouter.get("/fail", authController_1.failController);
 authRouter.post("/register", Validators_1.registerVS, Validators_1.valitatorVS, authController_1.registerController);
 authRouter.post("/logout", authMiddleware_1.enableAuthenticate, authController_1.logoutController);
 authRouter.get("/status", authController_1.isAuthController);
-authRouter.post("/login", passport_1.default.authenticate('local', { failureRedirect: '/auth/fail',
+authRouter.post("/login", Validators_1.loginVS, Validators_1.valitatorVS, passport_1.default.authenticate('local', { failureRedirect: '/auth/fail',
     failureMessage: true }), authController_1.loginController);
+authRouter.post("/subscribe", Validators_1.subsribeVS, Validators_1.valitatorVS, EmailSubscriptionController_1.subscribeController);
 exports.default = authRouter;

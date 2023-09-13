@@ -57,12 +57,16 @@ exports.registerController = (0, express_async_handler_1.default)((req, res) => 
         insert into store_users (email,password)
         values (?, ?)
         `, [email, hashed]);
-        res.status(200);
-        res.json({ success: true, status: 200
-        });
+        if (row) {
+            res.status(200);
+            res.json({ success: true, status: 200 });
+        }
+        else {
+            throw new Errors_1.InternalServerError('Error registering user to DB');
+        }
     }
     else {
-        throw new Errors_1.InternalServerError("hash problem");
+        throw new Errors_1.InternalServerError("Error hashing password");
     }
 }));
 exports.logoutController = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
