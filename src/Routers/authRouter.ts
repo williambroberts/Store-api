@@ -2,7 +2,7 @@
 import express from "express"
 import { enableAuthenticate } from "../Middleware/authMiddleware"
 import { failController, isAuthController, loginController, logoutController, registerController } from "../Controllers/authController"
-import { loginVS, registerVS, valitatorVS } from "../utils/Validators"
+import { loginVS, registerVS, subsribeVS, valitatorVS } from "../utils/Validators"
 import passport from "passport"
 
 const authRouter = express.Router()
@@ -12,6 +12,7 @@ import pool from "../db/db";
 import { comparePassword } from "../Helpers/passwords"
 
 import x from "passport-local"
+import { subscribeController } from "../Controllers/EmailSubscriptionController"
 //passport 
 const LocalStrategy = x.Strategy
 passport.serializeUser(function(user:any, done) {
@@ -79,5 +80,8 @@ passport.authenticate('local',
  failureMessage: true }),
  loginController)
 
+
+
+ authRouter.post("/subscribe",subsribeVS,valitatorVS,subscribeController)
 
 export default authRouter 

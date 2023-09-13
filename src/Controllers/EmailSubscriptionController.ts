@@ -6,7 +6,7 @@ import { InternalServerError } from "../utils/Errors";
 export const subscribeController = ash(async(req:any,res:Response)=>{
     //query db add email to the store_emails table
     let {email} = req.matchedData
-    console.log("email controller",email)
+    console.log("email sub controller",email)
     const result = await pool.query(`
     insert ignore into store_emails (email)
     VALUES (?);

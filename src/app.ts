@@ -82,7 +82,7 @@ app.get("/" ,(req,res)=>{
 
 app.use("/auth",authRouter)
 app.use("/suggest",suggestRouter)
-app.use("/subscribe",subscribeRouter)
+
 app.use(errorHandler)
 
 export default app
