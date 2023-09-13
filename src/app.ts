@@ -21,6 +21,7 @@ import bodyParser from "body-parser"
 
 import MySQLSessionStore  from "express-mysql-session" 
 import suggestRouter from "./Routers/suggestRouter"
+import subscribeRouter from "./Routers/EmailSubRouter"
 const MySQLStore = MySQLSessionStore(SESSION)
 let options = {}
 if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PORT && process.env.DB_PASSWORD && process.env.DB_DATABASE){
@@ -81,6 +82,7 @@ app.get("/" ,(req,res)=>{
 
 app.use("/auth",authRouter)
 app.use("/suggest",suggestRouter)
+app.use("/subscribe",subscribeRouter)
 app.use(errorHandler)
 
 export default app

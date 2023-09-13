@@ -12,6 +12,8 @@ const emailVs = body('email').escape().exists({checkFalsy:true}).withMessage("Em
 const nameVS = body('name').escape().exists({checkFalsy:true}).withMessage('Name is required').isString().withMessage("Name must be a string")
 const suggestionVS = body('suggestion').escape().exists({checkFalsy:true}).withMessage('Suggestion is required').isString().withMessage("Suggestion must be of type string")
 
+
+const subsribeVS = [emailVs]
 const registerVS = [passwordVS,emailVs]
 const suggestProductVS = [emailVs,nameVS,suggestionVS]
 const valitatorVS = (req:any,res:Response,next:NextFunction)=>{
@@ -19,7 +21,7 @@ const valitatorVS = (req:any,res:Response,next:NextFunction)=>{
     if (errors.isEmpty()){
         //todo chheck for valid incase passport uses req.body.email req.body.password
         console.log(matchedData(req))
-        console.trace()
+        //console.trace()
         req.matchedData = matchedData(req)
         return next()
     }else if (!errors.isEmpty()){
@@ -33,4 +35,4 @@ const valitatorVS = (req:any,res:Response,next:NextFunction)=>{
 //login
 const loginVS = [emailVs,passwordVS]
 
-export {loginVS,registerVS,valitatorVS,suggestProductVS}
+export {loginVS,registerVS,valitatorVS,suggestProductVS,subsribeVS}
