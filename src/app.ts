@@ -44,6 +44,7 @@ app.use(SESSION({
     resave:false,
     secret:"3824398",
     store:sessionStore,
+	cookie:{secure:false,sameSite:'none'}
 	// cookie:{maxAge:3600000}
 		
 }))
