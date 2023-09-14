@@ -50,7 +50,7 @@ export const registerController = ash(async(req:any,res:Response)=>{
         values (?, ?)
         `,[email,hashed])
         if (row){
-            res.status(200)
+            res.status(201)
             res.json({success:true,status:200})
         }else {
             throw new InternalServerError('Error registering user to DB')

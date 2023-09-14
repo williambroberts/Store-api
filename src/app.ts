@@ -40,7 +40,7 @@ const sessionStore = new MySQLStore(options,pool);
 app.use(cookieParser());
 app.use(SESSION({
     name:"fh485-dadwa",
-    saveUninitialized:false,
+    saveUninitialized:true,
     resave:false,
     secret:"3824398",
     store:sessionStore,
@@ -66,6 +66,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression())
 app.use(helmet())
+
 app.use(bodyParser.json())
 app.use(cors(
 	{
